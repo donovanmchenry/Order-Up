@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Up!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="light-mode">
+    <!-- Start Menu -->
+    <div id="start-menu" class="start-menu">
+        <h2 id="high-score">Most Dishes: 0</h2> <!-- High Score Display -->
+        <img src="chefshat.png" alt="Chef Hat" class="chef-hat"> <!-- Chef Hat Above -->
+        <h1>Order Up!</h1>
+        <button id="start-button">Start Game</button>
+        <button id="settings-button">Settings</button>
+    </div>
+
+    <!-- Game Container -->
+    <div id="game-container" class="game-container" style="display: none;">
+        <div id="dishes-counter" class="dishes-counter">Dishes Served: 0</div> <!-- Dishes Served Counter -->
+        <div class="customer">
+            <div class="bubble-container">
+                <img src="chefshat.png" alt="Chef Hat" class="chef-hat-side"> <!-- Chef Hat on the Left -->
+                <div class="speech-bubble">
+                    <p id="order-item"></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-board" class="board">
+            <!-- Cards will be dynamically created here -->
+        </div>
+
+        <div id="result"></div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="game-over-screen" class="game-over-screen" style="display: none;">
+        <img id="gordon-gif" src="" alt="Gordon Ramsay Gif" class="gordon-gif"> <!-- Random Gordon Ramsay Gif -->
+        <h1>Game Over</h1>
+        <button id="restart-button">Restart</button>
+    </div>
+
+    <!-- Settings Screen -->
+    <div id="settings-menu" class="settings-menu" style="display: none;">
+        <h1>Settings</h1>
+        <div>
+            <label for="theme-select">Theme:</label>
+            <select id="theme-select">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
+        <div>
+            <label for="music-toggle">Music:</label>
+            <input type="checkbox" id="music-toggle" checked> <!-- Music toggle -->
+        </div>
+        <button id="back-button">Back</button>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script> <!-- YouTube API -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+/* Hide the YouTube player visually */
+#player {
+    display: none;
+}
+
+/* Add longer shake animation */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    10% { transform: translateX(-10px); }
+    20% { transform: translateX(10px); }
+    30% { transform: translateX(-10px); }
+    40% { transform: translateX(10px); }
+    50% { transform: translateX(-10px); }
+    60% { transform: translateX(10px); }
+    70% { transform: translateX(-10px); }
+    80% { transform: translateX(10px); }
+    90% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 1s ease; /* Shake lasts 1 second */
+}
+
+
+/* Light Mode */
+body.light-mode {
+    background-color: #f4f4f9;
+    color: #2c3e50;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: #1e1e1e;
+    color: #ecf0f1;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* General Layout */
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Start Menu */
+.start-menu, .settings-menu, .game-over-screen, .game-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+}
+
+/* Chef Hat in Start Menu */
+.chef-hat {
+    width: 120px;
+    margin-bottom: 20px;
+}
+
+/* Bubble Container */
+.bubble-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Chef Hat next to Speech Bubble (on the left) */
+.chef-hat-side {
+    width: 100px;
+    margin-right: 20px;  /* Shift the hat to the left with some space between it and the bubble */
+}
+
+/* Start Menu Header */
+.start-menu h1 {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: inherit;
+}
+
+/* Buttons - Global Style */
+button {
+    padding: 15px 40px;
+    font-size: 20px;
+    background-color: #2980b9;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #3498db;
+}
+
+button:active {
+    background-color: #1c6b96;
+}
+
+/* Speech Bubble */
+.speech-bubble {
+    background-color: #ffffff;
+    border: 2px solid #2980b9;
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+    width: 300px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    visibility: hidden;
+    color: #2980b9;
+}
+
+body.dark-mode .speech-bubble {
+    background-color: #333;
+    border-color: #ecf0f1;
+    color: #fff;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50px;
+    border-width: 15px;
+    border-style: solid;
+    border-color: #ffffff transparent transparent transparent;
+}
+
+body.dark-mode .speech-bubble::after {
+    border-color: #333 transparent transparent transparent;
+}
+
+/* Board and Card Styles */
+.board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+    width: 80%;
+}
+
+.card {
+    background-color: #ffffff;
+    border: 2px solid #2980b9;
+    height: 140px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 8px;
+    color: #2980b9;
+    text-align: center;
+}
+
+body.dark-mode .card {
+    background-color: #333;
+    border-color: #ecf0f1;
+    color: #fff;
+}
+
+.card:hover {
+    background-color: #3498db;
+    color: #fff;
+}
+
+/* Game Over Screen */
+.game-over-screen h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: inherit;
+}
+
+#result {
+    margin-top: 30px;
+    font-size: 22px;
+    color: #27ae60;
+}
+
+#result.wrong {
+    color: #e74c3c;
+}
+
+/* Settings Menu */
+.settings-menu h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: inherit;
+}
+
+.settings-menu select {
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #2980b9;
+    background-color: #ecf0f1;
+    color: #2c3e50;
+}
+
+body.dark-mode .settings-menu select {
+    background-color: #333;
+    color: #fff;
+    border-color: #ecf0f1;
+}
+
+/* High Score Display */
+#high-score {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+body.dark-mode #high-score {
+    color: #ecf0f1;
+}
+
+/* Dishes Counter during gameplay */
+.dishes-counter {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2980b9;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+body.dark-mode .dishes-counter {
+    color: #ecf0f1;
+}
+
+/* Gordon Ramsay Gif Styling */
+.gordon-gif {
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+
