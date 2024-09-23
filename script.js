@@ -30,7 +30,7 @@ const initialNumOfCards = 4;
 const initialRevealTime = 6000;
 const minRevealTime = 2500;  // Minimum reveal time (2 seconds)
 let dishesServed = 0; // Number of dishes served in current game
-let highScore = 0; // High score across games
+let highScore = localStorage.getItem('highScore') || 0; // Load high score from localStorage
 
 let player;
 let isMusicPlaying = true;
@@ -92,6 +92,9 @@ const themeSelect = document.getElementById("theme-select");
 const speechBubble = document.querySelector(".speech-bubble");
 const highScoreElement = document.getElementById("high-score"); // High score element
 const dishesCounter = document.getElementById("dishes-counter"); // Dishes served counter
+
+// Display initial high score from localStorage
+highScoreElement.textContent = `Most Dishes: ${highScore}`;
 
 themeSelect.addEventListener("change", function() {
     document.body.className = themeSelect.value + "-mode";
@@ -217,6 +220,7 @@ function gameOver() {
     if (dishesServed > highScore) {
         highScore = dishesServed;
         highScoreElement.textContent = `Most Dishes: ${highScore}`;
+        localStorage.setItem('highScore', highScore); // Save the new high score to localStorage
     }
     
     // Select and display a random Gordon Ramsay gif
