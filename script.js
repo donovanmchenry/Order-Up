@@ -127,8 +127,10 @@ restartButton.addEventListener("click", function() {
 function startGame() {
     flippedCards = [];
     resultElement.textContent = '';
-    shuffleIngredients();
+    generateOrder();  // Generate the order before shuffling ingredients
+    shuffleIngredients();  // Shuffle after the order is generated
     createCards();
+    speechBubble.style.visibility = 'visible';  // Ensure speech bubble is visible
     showCards();
     setTimeout(hideCards, revealTime);
 }
@@ -161,12 +163,16 @@ function createCards() {
 }
 
 function showCards() {
-    cardElements.forEach(card => card.classList.add("flipped"));
+    cardElements.forEach(card => {
+        card.classList.add("flipped");
+        card.classList.add("disabled"); // Disable interaction while showing cards
+    });
 }
 
 function hideCards() {
     cardElements.forEach(card => {
         card.classList.remove("flipped");
+        card.classList.remove("disabled"); // Re-enable interaction after hiding cards
         card.textContent = "???";
     });
     speechBubble.style.visibility = 'visible';
@@ -228,6 +234,7 @@ function gameOver() {
     gordonGifElement.src = randomGif;
     
     gameContainer.style.display = 'none';
+    startMenu.style.display = 'none'; // Hide the Start Menu during game over
     gameOverScreen.style.display = 'flex';
 }
 
