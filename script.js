@@ -5,7 +5,7 @@ const allIngredients = ["Tomato", "Lettuce", "Cheese", "Onion", "Bacon", "Pickle
 let ingredients = ["Tomato", "Lettuce", "Cheese", "Onion" ]; 
 
 const orders = {
-    "BLT": ["Bacon", "Lettuce", "Tomato"],
+    "BLT": ["Bacon", "Lettuce", "Tomato","Bread"],
     "Cheeseburger": ["Cheese", "Patty", "Buns"],
     "Salad": ["Lettuce", "Onion", "Tomato"],
     "Burger": ["Patty", "Buns"],
@@ -37,7 +37,15 @@ let isMusicPlaying = true;
 
 const gordonGifs = [
     "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2NzanFidmJhdGZjZmJucncxMWZ6aXkycGY0MzhlZno5ZWhyb2ZocCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xT9DPJVjlYHwWsZRxm/giphy.gif",
-    "https://media.giphy.com/media/l3V0H7bYv5Ml5TOfu/giphy.gif?cid=ecf05e47d9mr8ho7np40hmd21m8rpmv3okwqkfcl2kyphiz8&ep=v1_gifs_search&rid=giphy.gif&ct=g"
+    "https://media.giphy.com/media/l3V0H7bYv5Ml5TOfu/giphy.gif?cid=ecf05e47d9mr8ho7np40hmd21m8rpmv3okwqkfcl2kyphiz8&ep=v1_gifs_search&rid=giphy.gif&ct=g",
+    "https://media.giphy.com/media/2kMQiSEW6Wkyh3YltH/giphy.gif?cid=790b7611optvsn0nbevccikfbjq8js72u5arvhuxsjzxstlg&ep=v1_gifs_search&rid=giphy.gif&ct=g",
+    "https://media.giphy.com/media/Ek57KMkeSM5MemJyC5/giphy.gif?cid=ecf05e47rftvrnlg7t27tcln3adfqfgwacepu6x9plbctgqy&ep=v1_gifs_search&rid=giphy.gif&ct=g",
+    "https://media.giphy.com/media/QKUjYdCuDLlo5f75ZO/giphy.gif?cid=ecf05e47mqqsx4r1bqs3wynz16mvyjlyi98n83e4uhwqzvyy&ep=v1_gifs_search&rid=giphy.gif&ct=g",
+    "https://media.giphy.com/media/xUOwGfotV8fWvYnv5C/giphy.gif?cid=ecf05e4791lvel7c33btsi80s0d1jtm99ddel140jerv5iio&ep=v1_gifs_search&rid=giphy.gif&ct=g",
+    "https://media.giphy.com/media/3oFzlY0DO131GoCFva/giphy.gif?cid=ecf05e47olvmkyts1behrf5a4gnyu05uv1hzps93trd84hbn&ep=v1_gifs_search&rid=giphy.gif&ct=g",
+    "https://media.giphy.com/media/sC8lOMglN2dqw/giphy.gif?cid=ecf05e471z1t2a7txb5kr2u3jlc7vnid2yha7oerxuq4fqci&ep=v1_gifs_search&rid=giphy.gif&ct=g",
+    "https://media.giphy.com/media/Nmh41I1Ef3vOXiaTaZ/giphy.gif?cid=ecf05e471z1t2a7txb5kr2u3jlc7vnid2yha7oerxuq4fqci&ep=v1_gifs_search&rid=giphy.gif&ct=g",
+    "https://media.giphy.com/media/l0HUfeRgKrWctz5ny/giphy.gif?cid=ecf05e478jhs7z1s14s017vjxy8jp7zwdaj4dib19ed8xnuw&ep=v1_gifs_search&rid=giphy.gif&ct=g"
 ];
 
 const gordonGifElement = document.getElementById("gordon-gif"); // Element to display the gif
@@ -132,7 +140,8 @@ function startGame() {
     createCards();
     speechBubble.style.visibility = 'visible';  // Ensure speech bubble is visible
     showCards();
-    setTimeout(hideCards, revealTime);
+    startLoadingBar(revealTime); // Start the loading bar with revealTime duration
+    setTimeout(hideCards, revealTime);  // Hide cards after revealTime expires
 }
 
 function shuffleIngredients() {
@@ -190,13 +199,15 @@ function selectCard(card, ingredient) {
         flippedCards.push(ingredient);
         card.classList.add("selected");
         card.textContent = ingredient;
-        
+
         if (!currentOrder.includes(ingredient)) {
             card.classList.add("shake");  // Add the shake animation class
+
+            // Wait for the animation to complete, then remove the shake class
             setTimeout(() => {
-                card.classList.remove("shake");
+                card.classList.remove("shake"); 
                 gameOver();  // Trigger game over after the shake animation
-            }, 1000);  // Wait for the 1-second animation to complete
+            }, 1000);  // Wait for the 1-second animation to complete (matches shake duration)
         }
     }
     if (flippedCards.length === currentOrder.length) checkOrder();
@@ -228,13 +239,16 @@ function gameOver() {
         highScoreElement.textContent = `Most Dishes: ${highScore}`;
         localStorage.setItem('highScore', highScore); // Save the new high score to localStorage
     }
-    
+
     // Select and display a random Gordon Ramsay gif
     const randomGif = gordonGifs[Math.floor(Math.random() * gordonGifs.length)];
-    gordonGifElement.src = randomGif;
-    
+    gordonGifElement.src = randomGif;  // Set the gif source every time the game ends
+
+    // Hide the game container and start menu
     gameContainer.style.display = 'none';
     startMenu.style.display = 'none'; // Hide the Start Menu during game over
+
+    // Show the Game Over screen
     gameOverScreen.style.display = 'flex';
 }
 
@@ -250,3 +264,24 @@ function updateDishesCounter() {
 function arraysEqual(a, b) {
     return JSON.stringify(a.sort()) === JSON.stringify(b.sort());
 }
+
+// Function to start the loading bar
+function startLoadingBar(duration) {
+    const loadingBar = document.getElementById("loading-bar");
+    loadingBar.style.transition = "none";  // Disable transitions initially to reset the bar instantly
+    loadingBar.style.width = "100%";  // Reset the loading bar to full width instantly
+    
+    // Force a reflow so the browser registers the reset width before starting the animation
+    loadingBar.offsetWidth; 
+    
+    // Now, enable the transition and animate the bar over the 'duration' of reveal time
+    loadingBar.style.transition = `width ${duration}ms linear`;
+    loadingBar.style.width = "0%";  // Shrink the loading bar to 0 over the revealTime
+}
+
+restartButton.addEventListener("click", function() {
+    gameOverScreen.style.display = 'none'; // Hide the Game Over screen
+    gordonGifElement.src = ""; // Clear the gif source when restarting
+    resetDifficulty();  // Reset the difficulty when restarting the game
+    startMenu.style.display = 'flex';  // Go back to the Start Menu
+});

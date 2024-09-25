@@ -254,3 +254,19 @@ body.dark-mode .dishes-counter {
 .card.disabled {
     pointer-events: none; /* Disable clicks */
 }
+
+#loading-bar-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background-color: #ecf0f1;
+}
+
+#loading-bar {
+    height: 100%;
+    background-color: #2980b9; /* The color of the loading bar */
+    width: 100%;
+    transition: width 0.5s linear;
+}
