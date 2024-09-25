@@ -253,5 +253,4 @@ body.dark-mode .dishes-counter {
 
 .card.disabled {
     pointer-events: none; /* Disable clicks */
-    opacity: 0.6; 
 }
