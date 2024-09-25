@@ -8,7 +8,7 @@ const orders = {
     "BLT": ["Bacon", "Lettuce", "Tomato","Bread"],
     "Cheeseburger": ["Cheese", "Patty", "Buns"],
     "Salad": ["Lettuce", "Onion", "Tomato"],
-    "Burger": ["Patty", "Buns"],
+    "Hamburger": ["Patty", "Buns"],
     "Baconator": ["Patty", "Buns", "Cheese", "Bacon"],
     "Bean and Cheese Burrito": ["Beans", "Cheese", "Tortilla"],
     "Mac and Cheese": ["Pasta", "Cheese"],
@@ -19,6 +19,7 @@ const orders = {
     "Pancakes with Butter and Syrup":["Pancakes","Butter","Syrup"],
     "Waffles with Butter and Syrup":["Waffles","Butter","Syrup"],
     "Egg Salad Sandwich":["Bread","Eggs","Mayo","Mustard"],
+    "Bacon, Egg and Cheese Bagel": ["Bagel", "Bacon", "Eggs", "Cheese"]
 };
 
 let flippedCards = [];
@@ -100,6 +101,9 @@ const themeSelect = document.getElementById("theme-select");
 const speechBubble = document.querySelector(".speech-bubble");
 const highScoreElement = document.getElementById("high-score"); // High score element
 const dishesCounter = document.getElementById("dishes-counter"); // Dishes served counter
+const howToPlayButton = document.getElementById('how-to-play-button');
+const howToPlayMenu = document.getElementById('how-to-play-menu');
+const closeHowToPlayButton = document.getElementById('close-how-to-play-button');
 
 // Display initial high score from localStorage
 highScoreElement.textContent = `Most Dishes: ${highScore}`;
@@ -284,4 +288,16 @@ restartButton.addEventListener("click", function() {
     gordonGifElement.src = ""; // Clear the gif source when restarting
     resetDifficulty();  // Reset the difficulty when restarting the game
     startMenu.style.display = 'flex';  // Go back to the Start Menu
+});
+
+// Show the How To Play menu when the "How To Play" button is clicked
+howToPlayButton.addEventListener('click', function() {
+    startMenu.style.display = 'none';  // Hide the start menu
+    howToPlayMenu.style.display = 'flex';  // Show the How To Play menu
+});
+
+// Close the How To Play menu and go back to the start menu
+closeHowToPlayButton.addEventListener('click', function() {
+    howToPlayMenu.style.display = 'none';  // Hide the How To Play menu
+    startMenu.style.display = 'flex';  // Show the start menu
 });

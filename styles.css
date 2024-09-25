@@ -270,3 +270,45 @@ body.dark-mode .dishes-counter {
     width: 100%;
     transition: width 0.5s linear;
 }
+
+/* How To Play Menu */
+.how-to-play-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    background-color: #f4f4f9;
+    color: #2c3e50;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+body.dark-mode .how-to-play-menu {
+    background-color: #333;
+    color: #fff;
+}
+
+.how-to-play-menu p {
+    font-size: 20px;
+    max-width: 80%;
+    line-height: 1.6;
+}
+
+.how-to-play-menu button {
+    padding: 10px 30px;
+    font-size: 18px;
+    background-color: #2980b9;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.how-to-play-menu button:hover {
+    background-color: #3498db;
+}
