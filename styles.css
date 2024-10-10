@@ -19,7 +19,7 @@
 }
 
 .shake {
-    animation: shake 1s ease; /* Shake lasts 1 second */
+    animation: shake 1.5s ease; /* Shake lasts 1 second */
 }
 
 

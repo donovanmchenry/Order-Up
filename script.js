@@ -206,13 +206,13 @@ function selectCard(card, ingredient) {
 
         if (!currentOrder.includes(ingredient)) {
             card.classList.add("shake");  // Add the shake animation class
-
-            // Wait for the animation to complete, then remove the shake class
+            
+            // Wait for the animation to complete, then remove the shake class and trigger game over
             setTimeout(() => {
                 card.classList.remove("shake"); 
                 gameOver();  // Trigger game over after the shake animation
-            }, 1000);  // Wait for the 1-second animation to complete (matches shake duration)
-        }
+            }, 1500);  // Ensure the delay matches your shake animation duration in CSS (e.g., 1 second)
+        }        
     }
     if (flippedCards.length === currentOrder.length) checkOrder();
 }
