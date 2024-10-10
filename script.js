@@ -146,6 +146,7 @@ function startGame() {
     showCards();
     startLoadingBar(revealTime); // Start the loading bar with revealTime duration
     setTimeout(hideCards, revealTime);  // Hide cards after revealTime expires
+    selectedGif = gordonGifs[Math.floor(Math.random()*gordonGifs.length)];
 }
 
 function shuffleIngredients() {
@@ -245,8 +246,7 @@ function gameOver() {
     }
 
     // Select and display a random Gordon Ramsay gif
-    const randomGif = gordonGifs[Math.floor(Math.random() * gordonGifs.length)];
-    gordonGifElement.src = randomGif;  // Set the gif source every time the game ends
+    gordonGifElement.src = selectedGif;  // Set the gif source every time the game ends
 
     // Hide the game container and start menu
     gameContainer.style.display = 'none';
