@@ -1,81 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Up!</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#59331e"><title>Order Up!</title><link rel="stylesheet" href="styles.css"></head>
 <body class="light-mode">
-    <!-- Start Menu -->
-    <div id="start-menu" class="start-menu">
-        <h2 id="high-score">Most Dishes: 0</h2> <!-- High Score Display -->
-        <img src="chefshat.png" alt="Chef Hat" class="chef-hat"> <!-- Chef Hat Above -->
-        <h1>Order Up!</h1>
-        <button id="start-button">Start Game</button>
-        <button id="how-to-play-button">How To Play</button> <!-- How To Play Button -->
-        <button id="settings-button">Settings</button>
-    </div>
-
-    <!-- Game Container -->
-    <div id="game-container" class="game-container" style="display: none;">
-        <div id="dishes-counter" class="dishes-counter">Dishes Served: 0</div> <!-- Dishes Served Counter -->
-        <div class="customer">
-            <div class="bubble-container">
-                <img src="chefshat.png" alt="Chef Hat" class="chef-hat-side"> <!-- Chef Hat on the Left -->
-                <div class="speech-bubble">
-                    <p id="order-item"></p>
-                </div>
-            </div>
-        </div>
-
-        <div id="game-board" class="board">
-            <!-- Cards will be dynamically created here -->
-        </div>
-
-        <div id="result"></div>
-
-        <div id="loading-bar-container">
-            <div id="loading-bar"></div>
-        </div>
-    </div>
-
-    <!-- Game Over Screen -->
-    <div id="game-over-screen" class="game-over-screen" style="display: none;">
-        <img id="gordon-gif" src="" alt="Gordon Ramsay Gif" class="gordon-gif"> <!-- Random Gordon Ramsay Gif -->
-        <h1>Game Over</h1>
-        <button id="restart-button">Restart</button>
-    </div>
-
-    <!-- Settings Screen -->
-    <div id="settings-menu" class="settings-menu" style="display: none;">
-        <h1>Settings</h1>
-        <div>
-            <label for="theme-select">Theme:</label>
-            <select id="theme-select">
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-            </select>
-        </div>
-        <div>
-            <label for="music-toggle">Music:</label>
-            <input type="checkbox" id="music-toggle" checked> <!-- Music toggle -->
-        </div>
-        <button id="back-button">Back</button>
-    </div>
-    <!-- How To Play Menu -->
-    <div id="how-to-play-menu" class="how-to-play-menu" style="display: none;">
-        <h1>How To Play</h1>
-        <p>
-            1. Click "Start Game" to begin.<br>
-            2. Memorize the ingredients displayed on the cards, they correspond to the dish.<br>
-            3. When the cards flip back over, you must click the ingredients.<br>
-            4. If you get it right, you'll serve the dish! If not, the game will end.<br>
-            5. Try to serve as many dishes as possible to beat your high score!
-        </p>
-        <button id="close-how-to-play-button">Close</button> <!-- Close button -->
-    </div>
-    <script src="https://www.youtube.com/iframe_api"></script> <!-- YouTube API -->
-    <script src="script.js"></script>
-</body>
-</html>
+  <main class="tabletop">
+    <section id="start-menu" class="screen start-menu">
+      <div class="menu-card"><span class="small-title">The memory card game</span><h1>Order Up!</h1><p>Remember the ingredients. Find the right cards. Keep the orders coming.</p><div class="menu-actions"><button id="start-button" class="action-button">Play game</button><button id="how-to-play-button" class="quiet-button">How to play</button><button id="settings-button" class="quiet-button">Settings</button></div><div id="high-score" class="high-score">Most Dishes: 0</div><a class="credits-link" href="credits.html">Photo credits</a></div><div class="menu-fan" aria-hidden="true"><div class="fan-card"><span>Tomato</span><img src="assets/food/tomato.jpg" alt=""></div><div class="fan-card"><span>Cheese</span><img src="assets/food/cheese.jpg" alt=""></div><div class="fan-card"><span>Lettuce</span><img src="assets/food/lettuce.jpg" alt=""></div></div>
+    </section>
+    <section id="game-container" class="screen game-container" style="display:none">
+      <div class="game-top"><div class="game-brand">Order Up!</div><div id="dishes-counter" class="dishes-counter">Dishes Served: 0</div></div>
+      <div class="customer"><div class="bubble-container"><div class="speech-bubble"><span class="bubble-kicker">Customer order</span><p id="order-item"></p><span class="bubble-prompt">Find the ingredients below</span></div></div></div>
+      <div class="round-status"><span id="phase-text">Memorize the cards</span><span class="round-help">Pick the ingredients in any order</span></div>
+      <div id="loading-bar-container"><div id="loading-bar"></div></div>
+      <div id="game-board" class="board" aria-label="Ingredient cards"></div>
+      <div id="result" role="status" aria-live="polite"></div>
+    </section>
+    <section id="game-over-screen" class="screen overlay-screen" style="display:none"><div class="menu-card result-card"><span class="small-title">Shift over</span><h1>Kitchen closed.</h1><p id="final-score"></p><div class="menu-actions"><button id="restart-button" class="action-button">Play again</button><button id="back-to-menu-button" class="quiet-button">Back to menu</button></div></div><img id="gordon-gif" src="" alt="" hidden></section>
+    <section id="settings-menu" class="screen overlay-screen" style="display:none"><div class="menu-card settings-card"><span class="small-title">Preferences</span><h1>Settings</h1><div class="setting"><label for="theme-select">Table lighting</label><select id="theme-select"><option value="light">Day</option><option value="dark">Night</option></select></div><div class="setting"><label for="music-toggle">Music</label><input id="music-toggle" type="checkbox" checked></div><button id="back-button" class="action-button">Back</button></div></section>
+    <section id="how-to-play-menu" class="screen overlay-screen" style="display:none"><div class="menu-card instructions-card"><span class="small-title">How to play</span><h1>Learn the shift.</h1><ol><li>Read the customer's order at the top of the table.</li><li>Memorize the ingredient cards before they turn over.</li><li>Tap the cards that belong in the dish. The order of your picks doesn't matter.</li><li>One wrong card ends the shift. Each served dish adds a card and speeds things up.</li></ol><button id="close-how-to-play-button" class="action-button">Got it</button></div></section>
+  </main>
+  <div id="player" aria-hidden="true"></div><script src="https://www.youtube.com/iframe_api"></script><script src="script.js"></script>
+</body></html>

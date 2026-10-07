@@ -1,0 +1,209 @@
+[
+  {
+    "ingredient": "Tomato",
+    "title": "Tomato je.jpg",
+    "author": "Softeis",
+    "license": "CC BY-SA 3.0",
+    "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "page": "https://commons.wikimedia.org/wiki/File:Tomato_je.jpg",
+    "path": "assets/food/tomato.jpg"
+  },
+  {
+    "ingredient": "Lettuce",
+    "title": "Butterhead lettuce.jpg",
+    "author": "CNEcija12345",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Butterhead_lettuce.jpg",
+    "path": "assets/food/lettuce.jpg"
+  },
+  {
+    "ingredient": "Cheese",
+    "title": "Nc cheese.jpg",
+    "author": "Ashish5513",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Nc_cheese.jpg",
+    "path": "assets/food/cheese.jpg"
+  },
+  {
+    "ingredient": "Onion",
+    "title": "Red onion centered.jpg",
+    "author": "Unknown creator",
+    "license": "CC BY-SA 3.0",
+    "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "page": "https://commons.wikimedia.org/wiki/File:Red_onion_centered.jpg",
+    "path": "assets/food/onion.jpg"
+  },
+  {
+    "ingredient": "Bacon",
+    "title": "Bacon strips.jpg",
+    "author": "Didriks from Cambridge, MA, USA",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bacon_strips.jpg",
+    "path": "assets/food/bacon.jpg"
+  },
+  {
+    "ingredient": "Pickle",
+    "title": "Pickled Cucumber Slices - Flickr - scubadive67.jpg",
+    "author": "James from Boulder, USA",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Pickled_Cucumber_Slices_-_Flickr_-_scubadive67.jpg",
+    "path": "assets/food/pickle.jpg"
+  },
+  {
+    "ingredient": "Patty",
+    "title": "Hamburger patty.jpg",
+    "author": "Lucas, cropped from PDphoto.org",
+    "license": "Public domain",
+    "license_url": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Hamburger_patty.jpg",
+    "path": "assets/food/patty.jpg"
+  },
+  {
+    "ingredient": "Buns",
+    "title": "Sesame seed hamburger buns.jpg",
+    "author": "jeffreyw",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Sesame_seed_hamburger_buns.jpg",
+    "path": "assets/food/buns.jpg"
+  },
+  {
+    "ingredient": "Beans",
+    "title": "Red kidney beans 2024-11-27.jpg",
+    "author": "Bean appreciator",
+    "license": "CC0",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Red_kidney_beans_2024-11-27.jpg",
+    "path": "assets/food/beans.jpg"
+  },
+  {
+    "ingredient": "Tortilla",
+    "title": "Flour Tortillas 001.jpg",
+    "author": "Ocdp",
+    "license": "CC0",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Flour_Tortillas_001.jpg",
+    "path": "assets/food/tortilla.jpg"
+  },
+  {
+    "ingredient": "Pasta",
+    "title": "Gomiti.jpg",
+    "author": "Popo le Chien",
+    "license": "CC0",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Gomiti.jpg",
+    "path": "assets/food/pasta.jpg"
+  },
+  {
+    "ingredient": "Tomato Sauce",
+    "title": "Fresh Tomato Sauce (Unsplash).jpg",
+    "author": "Dennis Klein klein2",
+    "license": "CC0",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Fresh_Tomato_Sauce_(Unsplash).jpg",
+    "path": "assets/food/tomato-sauce.jpg"
+  },
+  {
+    "ingredient": "Eggs",
+    "title": "Eggs Chicken.jpg",
+    "author": "safaritravelplus",
+    "license": "CC0",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Eggs_Chicken.jpg",
+    "path": "assets/food/eggs.jpg"
+  },
+  {
+    "ingredient": "Peanut Butter",
+    "title": "Peanut butter glass 3.jpg",
+    "author": "Shisma",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Peanut_butter_glass_3.jpg",
+    "path": "assets/food/peanut-butter.jpg"
+  },
+  {
+    "ingredient": "Jelly",
+    "title": "Strawberry jam (home preservation).jpg",
+    "author": "Nutrition, Food Safety & Health",
+    "license": "CC0",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Strawberry_jam_(home_preservation).jpg",
+    "path": "assets/food/jelly.jpg"
+  },
+  {
+    "ingredient": "Bread",
+    "title": "Bread slices.jpg",
+    "author": "Saral Shots",
+    "license": "CC0",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Bread_slices.jpg",
+    "path": "assets/food/bread.jpg"
+  },
+  {
+    "ingredient": "Bagel",
+    "title": "Bagel-Plain-Alt.jpg",
+    "author": "Evan-Amos",
+    "license": "Public domain",
+    "license_url": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Bagel-Plain-Alt.jpg",
+    "path": "assets/food/bagel.jpg"
+  },
+  {
+    "ingredient": "Butter",
+    "title": "Butter block.JPG",
+    "author": "Meanos",
+    "license": "Public domain",
+    "license_url": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Butter_block.JPG",
+    "path": "assets/food/butter.jpg"
+  },
+  {
+    "ingredient": "Pancakes",
+    "title": "Pancakes (Vegan) (Cropped).jpg",
+    "author": "Heliodex",
+    "license": "CC0",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Pancakes_(Vegan)_(Cropped).jpg",
+    "path": "assets/food/pancakes.jpg"
+  },
+  {
+    "ingredient": "Syrup",
+    "title": "Maple syrup.jpg",
+    "author": "User:Miguel Andrade",
+    "license": "Public domain",
+    "license_url": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Maple_syrup.jpg",
+    "path": "assets/food/syrup.jpg"
+  },
+  {
+    "ingredient": "Waffles",
+    "title": "Waffle with maple syrup - San Francisco, CA.jpg",
+    "author": "Daderot",
+    "license": "CC0",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Waffle_with_maple_syrup_-_San_Francisco,_CA.jpg",
+    "path": "assets/food/waffles.jpg"
+  },
+  {
+    "ingredient": "Mayo",
+    "title": "Mayonnaise (1).jpg",
+    "author": "jules",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Mayonnaise_(1).jpg",
+    "path": "assets/food/mayo.jpg"
+  },
+  {
+    "ingredient": "Mustard",
+    "title": "French's classic yellow mustard (cropped).jpg",
+    "author": "User:Aeæ~commonswiki",
+    "license": "CC BY-SA 3.0",
+    "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "page": "https://commons.wikimedia.org/wiki/File:French%27s_classic_yellow_mustard_(cropped).jpg",
+    "path": "assets/food/mustard.jpg"
+  }
+]

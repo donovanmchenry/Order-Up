@@ -1,6 +1,6 @@
 const allIngredients = ["Tomato", "Lettuce", "Cheese", "Onion", "Bacon", "Pickle", 
     "Patty", "Buns", "Beans", "Tortilla", "Pasta", "Tomato Sauce", "Eggs", 
-    "Peanut Butter","Jelly","Bread", "Bagel","Butter", "Pancakes", "Butter", "Syrup", 
+    "Peanut Butter","Jelly","Bread", "Bagel","Butter", "Pancakes", "Syrup",
     "Waffles","Mayo","Mustard"];
 let ingredients = ["Tomato", "Lettuce", "Cheese", "Onion" ]; 
 
@@ -31,10 +31,15 @@ const initialNumOfCards = 4;
 const initialRevealTime = 6000;
 const minRevealTime = 2500;  // Minimum reveal time (2 seconds)
 let dishesServed = 0; // Number of dishes served in current game
-let highScore = localStorage.getItem('highScore') || 0; // Load high score from localStorage
+let highScore = Number(localStorage.getItem('highScore')) || 0;
 
 let player;
 let isMusicPlaying = true;
+let selectedGif;
+let roundTimer;
+let nextRoundTimer;
+let gameOverTimer;
+let roundState = 'idle';
 
 const gordonGifs = [
     "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2NzanFidmJhdGZjZmJucncxMWZ6aXkycGY0MzhlZno5ZWhyb2ZocCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xT9DPJVjlYHwWsZRxm/giphy.gif",
@@ -52,6 +57,7 @@ const gordonGifs = [
 const gordonGifElement = document.getElementById("gordon-gif"); // Element to display the gif
 
 function onYouTubeIframeAPIReady() {
+    if (!document.getElementById('player')) return;
     player = new YT.Player('player', {
         height: '0',
         width: '0',
@@ -79,10 +85,10 @@ const musicToggle = document.getElementById('music-toggle');
 musicToggle.addEventListener('change', function() {
     if (musicToggle.checked) {
         isMusicPlaying = true;
-        player.playVideo(); // Play music when toggled on
+        if (player) player.playVideo();
     } else {
         isMusicPlaying = false;
-        player.pauseVideo(); // Pause music when toggled off
+        if (player) player.pauseVideo();
     }
 });
 
@@ -119,7 +125,7 @@ settingsButton.addEventListener("click", function() {
 
 backButton.addEventListener("click", function() {
     settingsMenu.style.display = 'none';
-    startMenu.style.display = 'flex';
+    startMenu.style.display = 'grid';
 });
 
 startButton.addEventListener("click", function() {
@@ -130,27 +136,26 @@ startButton.addEventListener("click", function() {
     startGame();
 });
 
-restartButton.addEventListener("click", function() {
-    gameOverScreen.style.display = 'none';
-    resetDifficulty();  // Reset the difficulty when restarting the game
-    startMenu.style.display = 'flex';
-});
-
 function startGame() {
+    clearTimeout(roundTimer);
+    clearTimeout(nextRoundTimer);
+    clearTimeout(gameOverTimer);
+    roundState = 'preview';
+    gameBoard.classList.remove('shuffling');
     flippedCards = [];
     resultElement.textContent = '';
     generateOrder();  // Generate the order before shuffling ingredients
     shuffleIngredients();  // Shuffle after the order is generated
     createCards();
+    document.getElementById('phase-text').textContent = 'Memorize the cards';
     speechBubble.style.visibility = 'visible';  // Ensure speech bubble is visible
     showCards();
     startLoadingBar(revealTime); // Start the loading bar with revealTime duration
-    setTimeout(hideCards, revealTime);  // Hide cards after revealTime expires
+    roundTimer = setTimeout(hideCards, revealTime);
     selectedGif = gordonGifs[Math.floor(Math.random()*gordonGifs.length)];
 }
 
 function shuffleIngredients() {
-    generateOrder();
     let requiredIngredients = [...currentOrder];
     let randomIngredients = [...requiredIngredients];
     while (randomIngredients.length < numOfCards) {
@@ -159,17 +164,29 @@ function shuffleIngredients() {
             randomIngredients.push(rand);
         }
     }
-    randomIngredients = randomIngredients.sort(() => 0.5 - Math.random());
+    for (let i = randomIngredients.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [randomIngredients[i], randomIngredients[j]] = [randomIngredients[j], randomIngredients[i]];
+    }
     ingredients = randomIngredients;
 }
 
 function createCards() {
     gameBoard.innerHTML = '';
     cardElements = [];
-    ingredients.forEach(ingredient => {
-        let card = document.createElement("div");
-        card.classList.add("card");
-        card.textContent = ingredient;
+    ingredients.forEach((ingredient, index) => {
+        let card = document.createElement("button");
+        card.type = 'button';
+        card.classList.add("card", "dealing", "flipped");
+        card.style.setProperty('--deal-delay', `${index * 85}ms`);
+        card.setAttribute('aria-label', ingredient);
+        const photo = `assets/food/${ingredient.toLowerCase().replaceAll(' ', '-')}.jpg`;
+        card.innerHTML = `<span class="card-inner"><span class="card-front"><span class="card-name"></span><span class="card-photo"><img alt="" draggable="false"></span><span class="card-kind">Ingredient</span></span><span class="card-back" aria-hidden="true"><span class="back-monogram">OU</span></span></span>`;
+        card.querySelector('.card-name').textContent = ingredient;
+        card.querySelector('img').src = photo;
+        card.addEventListener('animationend', event => {
+            if (event.animationName === 'deal') card.classList.remove('dealing');
+        });
         card.addEventListener("click", () => selectCard(card, ingredient));
         gameBoard.appendChild(card);
         cardElements.push(card);
@@ -184,10 +201,14 @@ function showCards() {
 }
 
 function hideCards() {
+    if (roundState !== 'preview') return;
+    roundState = 'recall';
+    document.getElementById('phase-text').textContent = 'Find the ingredients';
     cardElements.forEach(card => {
         card.classList.remove("flipped");
+        card.classList.add('face-down');
         card.classList.remove("disabled"); // Re-enable interaction after hiding cards
-        card.textContent = "???";
+        card.setAttribute('aria-label', 'Hidden ingredient card');
     });
     speechBubble.style.visibility = 'visible';
 }
@@ -200,33 +221,40 @@ function generateOrder() {
 }
 
 function selectCard(card, ingredient) {
+    if (roundState !== 'recall') return;
     if (flippedCards.length < currentOrder.length && !card.classList.contains("selected")) {
         flippedCards.push(ingredient);
         card.classList.add("selected");
-        card.textContent = ingredient;
+        card.classList.remove('face-down');
+        card.setAttribute('aria-label', ingredient);
 
         if (!currentOrder.includes(ingredient)) {
             card.classList.add("shake");  // Add the shake animation class
             
             // Wait for the animation to complete, then remove the shake class and trigger game over
-            setTimeout(() => {
+            roundState = 'failed';
+            gameOverTimer = setTimeout(() => {
                 card.classList.remove("shake"); 
                 gameOver();  // Trigger game over after the shake animation
             }, 1500);  // Ensure the delay matches your shake animation duration in CSS (e.g., 1 second)
         }        
     }
-    if (flippedCards.length === currentOrder.length) checkOrder();
+    if (roundState === 'recall' && flippedCards.length === currentOrder.length) checkOrder();
 }
 
 function checkOrder() {
     if (arraysEqual(flippedCards, currentOrder)) {
+        roundState = 'served';
         resultElement.textContent = "Correct!";
         dishesServed++; // Increment dishes served
         updateDishesCounter(); // Update the counter
-        setTimeout(() => {
+        nextRoundTimer = setTimeout(() => {
+            gameBoard.classList.add('shuffling');
+            nextRoundTimer = setTimeout(() => {
             increaseDifficulty();  // Increase difficulty after a correct round
             startGame();
-        }, 1000);
+            }, 550);
+        }, 750);
     } else {
         gameOver();
     }
@@ -238,6 +266,11 @@ function increaseDifficulty() {
 }
 
 function gameOver() {
+    if (roundState === 'ended') return;
+    roundState = 'ended';
+    clearTimeout(roundTimer);
+    clearTimeout(nextRoundTimer);
+    clearTimeout(gameOverTimer);
     // Update high score if the current game beats the previous high score
     if (dishesServed > highScore) {
         highScore = dishesServed;
@@ -247,6 +280,7 @@ function gameOver() {
 
     // Select and display a random Gordon Ramsay gif
     gordonGifElement.src = selectedGif;  // Set the gif source every time the game ends
+    document.getElementById('final-score').textContent = `You served ${dishesServed} ${dishesServed === 1 ? 'dish' : 'dishes'}.`;
 
     // Hide the game container and start menu
     gameContainer.style.display = 'none';
@@ -266,7 +300,7 @@ function updateDishesCounter() {
 }
 
 function arraysEqual(a, b) {
-    return JSON.stringify(a.sort()) === JSON.stringify(b.sort());
+    return a.length === b.length && a.every(item => b.includes(item));
 }
 
 // Function to start the loading bar
@@ -287,7 +321,18 @@ restartButton.addEventListener("click", function() {
     gameOverScreen.style.display = 'none'; // Hide the Game Over screen
     gordonGifElement.src = ""; // Clear the gif source when restarting
     resetDifficulty();  // Reset the difficulty when restarting the game
-    startMenu.style.display = 'flex';  // Go back to the Start Menu
+    startMenu.style.display = 'none';
+    gameContainer.style.display = 'flex';
+    dishesServed = 0;
+    updateDishesCounter();
+    startGame();
+});
+
+document.getElementById('back-to-menu-button').addEventListener('click', function() {
+    gameOverScreen.style.display = 'none';
+    gordonGifElement.src = '';
+    resetDifficulty();
+    startMenu.style.display = 'grid';
 });
 
 // Show the How To Play menu when the "How To Play" button is clicked
@@ -299,5 +344,5 @@ howToPlayButton.addEventListener('click', function() {
 // Close the How To Play menu and go back to the start menu
 closeHowToPlayButton.addEventListener('click', function() {
     howToPlayMenu.style.display = 'none';  // Hide the How To Play menu
-    startMenu.style.display = 'flex';  // Show the start menu
+    startMenu.style.display = 'grid';
 });
